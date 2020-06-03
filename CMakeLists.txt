@@ -10,6 +10,7 @@ set(BBsources
 
 set(BBheaders
 	include/BlueBerry.h
+	include/keys.h
 )
 
 add_library(BlueBerryGameEngine STATIC ${BBsources} ${BBheaders})
