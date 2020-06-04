@@ -1,6 +1,6 @@
 #pragma once
 
-//from BB3.h keys
+//from GLFW3.h keys
 
 #define BB_KEY_UNKNOWN            -1
 
