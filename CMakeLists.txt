@@ -5,13 +5,14 @@
 set(BBsources
 	src/BlueBerry.cpp
 	src/windows.cpp
-	
+	src/input.cpp
+
 	src/pch.h
 )
 
 set(BBheaders
 	include/BlueBerry.h
-	include/keys.h
+	include/input.h
 	include/windows.h
 )
 

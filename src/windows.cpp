@@ -1,19 +1,45 @@
 #include "windows.h"
-#include "keys.h"
+#include "input.h"
 
 namespace BlueBerry
 {
 	void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{
 		std::cout << "key: " << KEYBOARD_KEY_TO_STRING(key) << (action == 1 ? " pressed" : " released") << std::endl;
+		if(action == 1)
+		{
+			input::key.bool_ptr_pressed[key] = true;
+			input::key.bool_ptr_down[key] = true;
+		}
+		else
+		{
+			input::key.bool_ptr_released[key] = true;
+			input::key.bool_ptr_down[key] = false;
+		}
 	}
 	void glfw_mouse_pos_callback(GLFWwindow* window, double xpos, double ypos)
 	{
 		std::cout << "mouse pos: (" << xpos << ", " << ypos << ")" << std::endl;
+
+		input::mouse_pos.delta_x = xpos - input::mouse_pos.x;
+		input::mouse_pos.delta_y = xpos - input::mouse_pos.y;
+
+		input::mouse_pos.x = xpos;
+		input::mouse_pos.y = ypos;
 	}
 	void glfw_mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	{
 		std::cout << "mouse button: " << MOUSE_BUTTON_TO_STRING(button) << " " << (action == 1 ? " pressed" : " released") << std::endl;
+		if(action == 1)
+		{
+			input::mouse_button.bool_ptr_pressed[button] = true;
+			input::mouse_button.bool_ptr_down[button] = true;
+		}
+		else
+		{
+			input::mouse_button.bool_ptr_released[button] = true;
+			input::mouse_button.bool_ptr_down[button] = false;
+		}
 	}
 	void glfw_mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
