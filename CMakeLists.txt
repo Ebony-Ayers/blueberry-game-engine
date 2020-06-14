@@ -6,6 +6,7 @@ set(BBsources
 	src/BlueBerry.cpp
 	src/windows.cpp
 	src/input.cpp
+	src/runtime.cpp
 
 	src/pch.h
 )
@@ -14,6 +15,7 @@ set(BBheaders
 	include/BlueBerry.h
 	include/input.h
 	include/windows.h
+	include/runtime.h
 )
 
 add_library(BlueBerryGameEngine STATIC ${BBsources} ${BBheaders})
@@ -24,6 +26,8 @@ target_include_directories(BlueBerryGameEngine PRIVATE include/)
 #-------------------------------------------------------------------------------------------------------
 #												requirements
 #-------------------------------------------------------------------------------------------------------
+
+set(CMAKE_CXX_STANDARD 17)
 
 target_compile_features(BlueBerryGameEngine PRIVATE cxx_alignas)
 target_compile_features(BlueBerryGameEngine PRIVATE cxx_alignof)

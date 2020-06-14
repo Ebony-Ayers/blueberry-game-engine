@@ -1,9 +1,9 @@
 
-if (NOT EXISTS "/home/joseph/git/Joseph-Davies/blueberry-game-engine/sandbox/build/external/BlueBerry/external/glfw/install_manifest.txt")
-    message(FATAL_ERROR "Cannot find install manifest: \"/home/joseph/git/Joseph-Davies/blueberry-game-engine/sandbox/build/external/BlueBerry/external/glfw/install_manifest.txt\"")
+if (NOT EXISTS "/home/joseph/git/Ebony-Davies/blueberry-game-engine/sandbox/build/external/BlueBerry/external/glfw/install_manifest.txt")
+    message(FATAL_ERROR "Cannot find install manifest: \"/home/joseph/git/Ebony-Davies/blueberry-game-engine/sandbox/build/external/BlueBerry/external/glfw/install_manifest.txt\"")
 endif()
 
-file(READ "/home/joseph/git/Joseph-Davies/blueberry-game-engine/sandbox/build/external/BlueBerry/external/glfw/install_manifest.txt" files)
+file(READ "/home/joseph/git/Ebony-Davies/blueberry-game-engine/sandbox/build/external/BlueBerry/external/glfw/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})

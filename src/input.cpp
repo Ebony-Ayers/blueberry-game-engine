@@ -128,15 +128,6 @@ namespace BlueBerry
 		if(key == 347) { return "RIGHT_SUPER"; }
 		if(key == 348) { return "MENU"; }
 
-		if(key == BB_KEY_MENU) { return "LAST"; }
-
-		if(key == 0x0001) { return "SHIFT"; }
-		if(key == 0x0002) { return "CONTROL"; }
-		if(key == 0x0004) { return "ALT"; }
-		if(key == 0x0008) { return "SUPER"; }
-		if(key == 0x0010) { return "CAPS_LOCK"; }
-		if(key == 0x0020) { return "NUM_LOCK"; }
-
 		return "Error: no key found";
 	}
 
@@ -238,7 +229,7 @@ namespace BlueBerry
 		}
 		s_key::s_key()
 		{
-		this->num_keys = 350;
+			this->num_keys = 350;
 			this->bool_ptr_pressed = (bool*)(&(this->pressed));
 			this->bool_ptr_released = (bool*)(&(this->released));
 			this->bool_ptr_down  = (bool*)(&(this->down));
@@ -260,7 +251,7 @@ namespace BlueBerry
 		}
 		s_mouse_button::s_mouse_button()
 		{
-		this->num_keys = 8;
+			this->num_keys = 8;
 			this->bool_ptr_pressed = (bool*)(&(this->pressed));
 			this->bool_ptr_released = (bool*)(&(this->released));
 			this->bool_ptr_down  = (bool*)(&(this->down));
@@ -282,7 +273,7 @@ namespace BlueBerry
 		}
 		s_joystick::s_joystick()
 		{
-		this->num_keys = 16;
+			this->num_keys = 16;
 			this->bool_ptr_pressed = (bool*)(&(this->pressed));
 			this->bool_ptr_released = (bool*)(&(this->released));
 			this->bool_ptr_down  = (bool*)(&(this->down));
@@ -304,7 +295,7 @@ namespace BlueBerry
 		}
 		s_game_pad_button::s_game_pad_button()
 		{
-		this->num_keys = 15;
+			this->num_keys = 15;
 			this->bool_ptr_pressed = (bool*)(&(this->pressed));
 			this->bool_ptr_released = (bool*)(&(this->released));
 			this->bool_ptr_down  = (bool*)(&(this->down));
@@ -326,7 +317,7 @@ namespace BlueBerry
 		}
 		s_game_pad_axix::s_game_pad_axix()
 		{
-		this->num_keys = 6;
+			this->num_keys = 6;
 			this->bool_ptr_pressed = (bool*)(&(this->pressed));
 			this->bool_ptr_released = (bool*)(&(this->released));
 			this->bool_ptr_down  = (bool*)(&(this->down));
@@ -360,5 +351,37 @@ namespace BlueBerry
 		}
 
 		s_mouse_pos mouse_pos = s_mouse_pos();
+
+		void debug_print_keys_pressed()
+		{
+			
+			std::cout << "==========================================================================\n";
+			std::cout << "printing keys pressed\n";
+			for(int i = 0; i < key.num_keys; i++)
+			{
+				std::cout << "\t" << KEYBOARD_KEY_TO_STRING(i) << " pressed = " << (key.bool_ptr_pressed[i] == true ? "true" : "false") << "\n";
+			}
+			std::cout << "==========================================================================\n";
+		}
+		void debug_print_keys_released()
+		{
+			std::cout << "==========================================================================\n";
+			std::cout << "printing keys released\n";
+			for(int i = 0; i < key.num_keys; i++)
+			{
+				std::cout << "\t" << KEYBOARD_KEY_TO_STRING(i) << " released = " << (key.bool_ptr_released[i] == true ? "true" : "false") << "\n";
+			}
+			std::cout << "==========================================================================\n";
+		}
+		void debug_print_keys_down()
+		{
+			std::cout << "==========================================================================\n";
+			std::cout << "printing keys down\n";
+			for(int i = 0; i < key.num_keys; i++)
+			{
+				std::cout << "\t" << KEYBOARD_KEY_TO_STRING(i) << " down = " << (key.bool_ptr_down[i] == true ? "true" : "false") << "\n";
+			}
+			std::cout << "==========================================================================\n";
+		}
 	}
 }

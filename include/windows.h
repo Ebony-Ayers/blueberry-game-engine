@@ -12,4 +12,5 @@ namespace BlueBerry
 	int handle_inputs();
 
 	extern GLFWwindow* main_window;
+	extern bool should_close;
 }

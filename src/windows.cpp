@@ -1,11 +1,14 @@
+#include "pch.h"
+
 #include "windows.h"
 #include "input.h"
+#include "runtime.h"
 
 namespace BlueBerry
 {
 	void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{
-		std::cout << "key: " << KEYBOARD_KEY_TO_STRING(key) << (action == 1 ? " pressed" : " released") << std::endl;
+		//std::cout << "key: " << KEYBOARD_KEY_TO_STRING(key) << (action == 1 ? " pressed" : " released") << std::endl;
 		if(action == 1)
 		{
 			input::key.bool_ptr_pressed[key] = true;
@@ -19,7 +22,7 @@ namespace BlueBerry
 	}
 	void glfw_mouse_pos_callback(GLFWwindow* window, double xpos, double ypos)
 	{
-		std::cout << "mouse pos: (" << xpos << ", " << ypos << ")" << std::endl;
+		//std::cout << "mouse pos: (" << xpos << ", " << ypos << ")" << std::endl;
 
 		input::mouse_pos.delta_x = xpos - input::mouse_pos.x;
 		input::mouse_pos.delta_y = xpos - input::mouse_pos.y;
@@ -29,7 +32,7 @@ namespace BlueBerry
 	}
 	void glfw_mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	{
-		std::cout << "mouse button: " << MOUSE_BUTTON_TO_STRING(button) << " " << (action == 1 ? " pressed" : " released") << std::endl;
+		//std::cout << "mouse button: " << MOUSE_BUTTON_TO_STRING(button) << " " << (action == 1 ? " pressed" : " released") << std::endl;
 		if(action == 1)
 		{
 			input::mouse_button.bool_ptr_pressed[button] = true;
@@ -54,6 +57,7 @@ namespace BlueBerry
 	}
 
 	GLFWwindow* main_window = nullptr;
+	bool should_close = false;
     int initialise_window()
 	{
 		glfwInit();
@@ -64,7 +68,7 @@ namespace BlueBerry
 		glfwSetCursorPosCallback(main_window, glfw_mouse_pos_callback);
 		glfwSetMouseButtonCallback(main_window, glfw_mouse_button_callback);
 		glfwSetScrollCallback(main_window, glfw_mouse_scroll_callback);
-		glfwSetDropCallback(main_window, glfw_drag_drop_callback);	
+		glfwSetDropCallback(main_window, glfw_drag_drop_callback);
 
 		return 0;
 	}
@@ -72,8 +76,16 @@ namespace BlueBerry
 	{
 		while(!glfwWindowShouldClose(main_window))
 		{
-			glfwWaitEvents();
-			//glfwPollEvents();
+			//glfwWaitEvents();
+			
+			if(!BlueBerry::should_close)
+			{
+				BlueBerry::runtime::frame_rendered_mutex.lock();
+			}
+			BlueBerry::input::key.reset_pressed();
+			BlueBerry::input::key.reset_released();
+			
+			glfwPollEvents();
 		}
 		glfwTerminate();
 		

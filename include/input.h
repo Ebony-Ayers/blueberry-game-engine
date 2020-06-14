@@ -1540,5 +1540,9 @@ namespace BlueBerry
 		};
 
 		extern s_mouse_pos mouse_pos;
+
+		void debug_print_keys_pressed();
+		void debug_print_keys_released();
+		void debug_print_keys_down();
 	}
 }
