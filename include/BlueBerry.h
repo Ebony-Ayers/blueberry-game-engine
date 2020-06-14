@@ -2,5 +2,6 @@
 
 namespace BlueBerry
 {
+	//intialise the engine
 	int init();
 }

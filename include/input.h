@@ -208,6 +208,8 @@ namespace BlueBerry
 	{
 		struct s_key
 		{
+			//bool pointer is used to index the struct as an array where the index is the g;fw key code
+			//reset function memset the values to all false
 			struct
 			{
 				bool PLACE_HOLDER_0;

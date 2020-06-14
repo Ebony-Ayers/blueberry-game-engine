@@ -8,8 +8,10 @@ namespace BlueBerry
 	void glfw_mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 	void glfw_drag_drop_callback(GLFWwindow* window, int count, const char** paths);
 
+	//initialise glfw
 	int initialise_window();
-	int handle_inputs();
+	//loop for glfw inputs
+	int input_handling_loop();
 
 	extern GLFWwindow* main_window;
 	extern bool should_close;

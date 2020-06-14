@@ -12,6 +12,8 @@ namespace BlueBerry
 		
 		int start_runtime()
 		{
+			//status -1 means close runtime main thread
+			//status  0 mean continue as normal
 			int status = 0;
 			
 			while(true)
@@ -22,6 +24,10 @@ namespace BlueBerry
 				{
 					case -1:
 						return 0;
+						break;
+					case 0:
+						break;
+					default:
 						break;
 				}	
 			}

@@ -72,7 +72,7 @@ namespace BlueBerry
 
 		return 0;
 	}
-	int handle_inputs()
+	int input_handling_loop()
 	{
 		while(!glfwWindowShouldClose(main_window))
 		{
