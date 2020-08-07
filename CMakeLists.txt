@@ -17,7 +17,6 @@ set(BBsources
 	src/windows.cpp
 	src/input.cpp
 	src/runtime.cpp
-	src/log.cpp
 
 	src/pch.h
 )
@@ -27,7 +26,6 @@ set(BBheaders
 	include/input.h
 	include/windows.h
 	include/runtime.h
-	include/log.h
 
 	include/config.h
 )
@@ -55,31 +53,33 @@ target_compile_features(BlueBerryGameEngine PRIVATE cxx_strong_enums)
 #												compiler options
 #-------------------------------------------------------------------------------------------------------
 
-#tell the engine the cmake is handeling flags
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_CMAKE)
+option(MANAGE_ENGINE_OPTIONS_IN_HEADER OFF)
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_DEBUG=true)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_RELEASE=false)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_PROFILING=true)
-endif()
+option(BB_DEBUG "debugging options for the engine that are seperate from everything else" OFF)
+option(BB_RELEASE "build the engine for a realse of the game" fOFF)
+option(BB_PROFILING "built in engine profiler" OFF)
 
-if(CMAKE_BUILD_TYPE STREQUAL "Release")
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_DEBUG=false)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_RELEASE=true)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_PROFILING=false)
-endif()
+if(NOT MANAGE_ENGINE_OPTIONS_IN_HEADER)
+	#tell the engine the cmake is handeling flags
+	target_compile_definitions(BlueBerryGameEngine PUBLIC BB_CMAKE)
 
-if(CMAKE_BUILD_TYPE STREQUAL "Relwithdebinfo")
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_DEBUG=true)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_RELEASE=true)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_PROFILING=true)
-endif()
+	if(BB_DEBUG)
+		target_compile_definitions(BlueBerryGameEngine PUBLIC BB_DEBUG=true)
+	else()
+		target_compile_definitions(BlueBerryGameEngine PUBLIC BB_DEBUG=false)
+	endif()
 
-if(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_DEBUG=false)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_RELEASE=true)
-target_compile_definitions(BlueBerryGameEngine PUBLIC BB_PROFILING=false)
+	if(BB_RELEASE)
+		target_compile_definitions(BlueBerryGameEngine PUBLIC BB_RELEASE=true)
+	else()
+		target_compile_definitions(BlueBerryGameEngine PUBLIC BB_RELEASE=false)
+	endif()
+
+	if(BB_PROFILING)
+		target_compile_definitions(BlueBerryGameEngine PUBLIC BB_PROFILING=true)
+	else()
+		target_compile_definitions(BlueBerryGameEngine PUBLIC BB_PROFILING=false)
+	endif()
 endif()
 
 #-------------------------------------------------------------------------------------------------------
