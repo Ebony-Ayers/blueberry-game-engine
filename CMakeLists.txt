@@ -17,7 +17,9 @@ set(BBsources
 	src/windows.cpp
 	src/input.cpp
 	src/runtime.cpp
+	src/log.cpp
 
+	src/stb_include.h
 	src/pch.h
 )
 
@@ -26,6 +28,7 @@ set(BBheaders
 	include/input.h
 	include/windows.h
 	include/runtime.h
+	include/log.h
 
 	include/config.h
 )
@@ -149,7 +152,7 @@ else()
 	message(AUTHOR_WARNING "No compiler warnings set for '${CMAKE_CXX_COMPILER_ID}' compiler.")
 endif()
 
-target_compile_options(BlueBerryGameEngine INTERFACE ${PROJECT_WARNINGS})
+target_compile_options(BlueBerryGameEngine PRIVATE ${PROJECT_WARNINGS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -168,13 +171,13 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(external/glfw)
-target_link_libraries(BlueBerryGameEngine glfw)
+target_link_libraries(BlueBerryGameEngine PRIVATE glfw)
 #find_package(OpenGL REQUIRED)
 #target_link_libraries(${PROJECT_NAME} OpenGL::GL)
 
 #GLM
 add_subdirectory(external/glm)
-target_link_libraries(BlueBerryGameEngine glm)
+target_link_libraries(BlueBerryGameEngine PUBLIC glm)
 
 #STB
 target_include_directories(BlueBerryGameEngine PUBLIC external/stb)

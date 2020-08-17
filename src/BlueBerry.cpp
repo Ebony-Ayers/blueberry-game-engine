@@ -3,18 +3,25 @@
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include "stb_include.h"
 
 #include "pch.h"
 
 #include "windows.h"
 #include "runtime.h"
+#include "log.h"
 
 namespace BlueBerry
 {
 	int init()
 	{
+		std::cout << "BlueBerry Game engine version 0.0.0" << std::endl;
+		#ifdef __GNUC__
+		std::cout << "compiled: GCC v" << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__ << std::endl;
+		std::cout << "c++ standard: " << std::to_string(__cplusplus).substr(0, 4)  << " v" << std::to_string(__cplusplus).substr(4, 2) << std::endl;
+		std::cout << "compiled on " << __DATE__ << " at " << __TIME__ << std::endl;
+		#endif
+		
 		//create the window with glfw
 		BlueBerry::initialise_window();
 		
@@ -26,7 +33,7 @@ namespace BlueBerry
 
 		//runtime main thread should be closed at this point but needed for safety
 		runtime_main_thread.join();
-
+		
 		return 0;
 	}
 }
