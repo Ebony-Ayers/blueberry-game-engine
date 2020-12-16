@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.15)
 #												c++ standard
 #-------------------------------------------------------------------------------------------------------
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -18,6 +18,7 @@ set(BBsources
 	src/input.cpp
 	src/runtime.cpp
 	src/log.cpp
+	src/fileio.cpp
 
 	src/stb_include.h
 	src/pch.h
@@ -29,6 +30,7 @@ set(BBheaders
 	include/windows.h
 	include/runtime.h
 	include/log.h
+	include/fileio.h
 
 	include/config.h
 )
